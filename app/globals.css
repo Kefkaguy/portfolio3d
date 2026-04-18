@@ -1,26 +1,124 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0a0a0b;
+  --bg-2: #0f0f11;
+  --ink: #ededec;
+  --ink-dim: #8a8a88;
+  --ink-faint: #3a3a3c;
+  --rule: rgba(237, 237, 236, 0.09);
+  --accent: #7cfc00;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-inter-tight);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-inter-tight), sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.mono {
+  font-family: var(--font-jetbrains-mono), monospace;
+  letter-spacing: 0.01em;
+}
+
+.u {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.serif {
+  font-family: var(--font-instrument-serif), serif;
+}
+
+.grain-overlay {
+  background-image:
+    radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.6) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.9;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--rule);
+  padding: 0.6rem 1rem;
+  font-size: 0.75rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, filter 0.2s ease;
+}
+
+.pill:hover {
+  border-color: var(--ink);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.pill-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0a0a0b;
+  font-weight: 600;
+}
+
+.pill-primary:hover {
+  filter: brightness(1.05);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.6875rem;
+  color: var(--ink-dim);
+}
+
+.eyebrow-bar {
+  height: 1px;
+  width: 1.5rem;
+  background: var(--ink-dim);
+}
+
+.section-shell {
+  position: relative;
+  z-index: 10;
+  width: min(1500px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+@media (max-width: 820px) {
+  .section-shell {
+    width: min(100%, calc(100% - 40px));
+  }
 }
